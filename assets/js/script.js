@@ -138,26 +138,38 @@ for (let i = 0; i < formInputs.length; i++) {
 form.addEventListener('submit', function(event) {
   event.preventDefault();
   
+  // Check if EmailJS is initialized
+  if (typeof emailjs === 'undefined') {
+    alert('Email service is not properly configured. Please contact the developer.');
+    return;
+  }
+  
   // Disable button and show loading state
   formBtn.setAttribute("disabled", "");
   const originalText = formBtn.querySelector('span').textContent;
   formBtn.querySelector('span').textContent = 'Sending...';
   
-  // Get form data - matching EmailJS template variables exactly
+  // Get form data
+  const fullName = form.fullname.value;
+  const email = form.email.value;
+  const message = form.message.value;
+  
+  // Prepare template parameters
   const templateParams = {
-    to_name: 'Rezaul', // matches {{to_name}} in template
-    from_name: form.fullname.value, // matches {{from_name}} in template
-    message: form.message.value, // matches {{message}} in template
-    reply_to: form.email.value // matches {{reply_to}} in template
+    to_email: 'rezaulkhan52003@gmail.com',
+    from_name: fullName,
+    from_email: email,
+    message: message,
+    subject: 'New Contact Form Message'
   };
   
   // Send email using EmailJS
-  emailjs.send('service_v7d307a', 'template_ns7ke1p', templateParams)
+  emailjs.send('service_xxxxxx', 'template_xxxxxx', templateParams)
     .then(function(response) {
       console.log('SUCCESS!', response.status, response.text);
       
       // Show success message
-      alert('Message sent successfully! I will get back to you soon.');
+      alert('✓ Message sent successfully! I will get back to you soon.');
       
       // Reset form
       form.reset();
@@ -169,8 +181,14 @@ form.addEventListener('submit', function(event) {
     }, function(error) {
       console.log('FAILED...', error);
       
-      // Show error message
-      alert('Failed to send message. Please try again or contact me directly via email.');
+      // Show detailed error message
+      let errorMsg = 'Failed to send message. ';
+      if (error.text) {
+        errorMsg += 'Error: ' + error.text;
+      } else {
+        errorMsg += 'Please check your EmailJS configuration (Service ID and Template ID).';
+      }
+      alert(errorMsg);
       
       // Reset button
       formBtn.querySelector('span').textContent = originalText;
@@ -201,3 +219,32 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+
+
+// ============================================
+// VIEW RESUME FUNCTIONALITY
+// ============================================
+
+// Function to handle viewing resume
+function viewResume(event) {
+  event.preventDefault();
+  
+  const resumePath = './assets/documents/resume.pdf';
+  
+  // Open PDF in new tab
+  window.open(resumePath, '_blank', 'noopener,noreferrer');
+  
+  // Optional: Add analytics or tracking here if needed
+  console.log('Resume viewed');
+}
+
+// Add event listener when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  const resumeBtn = document.querySelector('[data-resume-btn]');
+  
+  if (resumeBtn) {
+    resumeBtn.addEventListener('click', viewResume);
+    console.log('Resume button event listener added');
+  }
+});
