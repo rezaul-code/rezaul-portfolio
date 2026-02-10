@@ -230,10 +230,8 @@ for (let i = 0; i < navigationLinks.length; i++) {
 function viewResume(event) {
   event.preventDefault();
   
-  const resumePath = './assets/documents/resume.pdf';
-  
-  // Open PDF in new tab
-  window.open(resumePath, '_blank', 'noopener,noreferrer');
+ window.open('/resume', '_blank', 'noopener,noreferrer');
+
   
   // Optional: Add analytics or tracking here if needed
   console.log('Resume viewed');
