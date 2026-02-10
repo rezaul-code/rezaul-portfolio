@@ -230,19 +230,17 @@ for (let i = 0; i < navigationLinks.length; i++) {
 function viewResume(event) {
   event.preventDefault();
   
- window.open('/resume', '_blank', 'noopener,noreferrer');
+  window.open('/resume.pdf', '_blank', 'noopener,noreferrer');
 
-  
-  // Optional: Add analytics or tracking here if needed
   console.log('Resume viewed');
 }
 
-// Add event listener when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  const resumeBtn = document.querySelector('[data-resume-btn]');
-  
-  if (resumeBtn) {
-    resumeBtn.addEventListener('click', viewResume);
-    console.log('Resume button event listener added');
-  }
-});
+// Add event listener immediately
+const resumeBtn = document.querySelector('[data-resume-btn]');
+
+if (resumeBtn) {
+  resumeBtn.addEventListener('click', viewResume);
+  console.log('Resume button event listener added');
+} else {
+  console.warn('Resume button not found');
+}
