@@ -223,7 +223,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
 
 // ============================================
-// VIEW rezaul_resume FUNCTIONALITY
+// VIEW resume\ FUNCTIONALITY
 // ============================================
 
 // Function to handle viewing resume
