@@ -2105,3 +2105,26 @@ textarea.form-input::-webkit-resizer { display: none; }
     }
 
 }
+
+.project-links{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+}
+
+.project-btn{
+    flex:1;
+    text-align:center;
+    padding:8px 12px;
+    border-radius:8px;
+    background:#2f2f2f;
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+.project-btn:hover{
+    background:#f5c542;
+    color:#000;
+}
